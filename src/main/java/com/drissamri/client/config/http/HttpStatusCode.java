@@ -1,4 +1,4 @@
-package com.drissamri.client.http;
+package com.drissamri.client.config.http;
 
 public enum HttpStatusCode {
     OK_200(200),

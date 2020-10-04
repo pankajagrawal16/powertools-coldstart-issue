@@ -1,4 +1,4 @@
-package com.drissamri.client;
+package com.drissamri.client.config;
 
 import com.drissamri.client.service.ClientService;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;

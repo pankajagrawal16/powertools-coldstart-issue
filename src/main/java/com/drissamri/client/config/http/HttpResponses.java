@@ -1,4 +1,4 @@
-package com.drissamri.client.http;
+package com.drissamri.client.config.http;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
