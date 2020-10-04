@@ -10,6 +10,7 @@ import software.amazon.awssdk.services.dynamodb.model.PutItemResponse;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 public class ClientService {
@@ -23,6 +24,7 @@ public class ClientService {
     public void create(Client client) {
         final Map<String, AttributeValue> itemValues = new HashMap<>();
         itemValues.put("pk", AttributeValue.builder().s(client.getName()).build());
+        itemValues.put("uuid", AttributeValue.builder().s(UUID.randomUUID().toString()).build());
 
         PutItemRequest request = PutItemRequest.builder()
                 .tableName(System.getenv("CLIENT_TABLE"))
@@ -30,8 +32,7 @@ public class ClientService {
                 .build();
 
         try {
-            PutItemResponse result = this.dynamoDbClient.putItem(request).get();
-            LOG.info("Put: {}", result);
+            this.dynamoDbClient.putItem(request).get();
         } catch (Exception e) {
             LOG.warn(e.getMessage());
             throw new RuntimeException("Database update failed!");
