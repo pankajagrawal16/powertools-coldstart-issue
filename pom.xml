@@ -17,7 +17,6 @@
         <aws.sdk.version>2.15.2</aws.sdk.version>
         <aws.lambda-events.version>3.3.1</aws.lambda-events.version>
         <aws.lambda.java-core.version>1.2.1</aws.lambda.java-core.version>
-        <symphonia.logging.version>1.0.3</symphonia.logging.version>
     </properties>
 
     <dependencies>
@@ -57,17 +56,10 @@
 
         <!-- Logging -->
         <dependency>
-            <groupId>io.symphonia</groupId>
-            <artifactId>lambda-logging</artifactId>
-            <version>${symphonia.logging.version}</version>
-        </dependency>
-        <!--
-        <dependency>
             <groupId>software.amazon.lambda</groupId>
             <artifactId>powertools-logging</artifactId>
             <version>0.4.0-beta</version>
         </dependency>
-        -->
 
         <!-- JSON -->
         <dependency>
@@ -152,7 +144,6 @@
                 </configuration>
             </plugin>
 
-            <!--
             <plugin>
                 <groupId>com.nickwongdev</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
@@ -176,7 +167,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
         </plugins>
     </build>
 
