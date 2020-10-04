@@ -6,9 +6,11 @@ import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 import software.amazon.awssdk.services.dynamodb.model.PutItemRequest;
+import software.amazon.awssdk.services.dynamodb.model.PutItemResponse;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class ClientService {
     private static final Logger LOG = LoggerFactory.getLogger(ClientService.class);
@@ -28,10 +30,8 @@ public class ClientService {
                 .build();
 
         try {
-            long startTime = System.currentTimeMillis();
-            this.dynamoDbClient.putItem(request);
-            long endTime = System.currentTimeMillis();
-            LOG.info("DynamoDB: " + (endTime - startTime) + " milliseconds");
+            PutItemResponse result = this.dynamoDbClient.putItem(request).get();
+            LOG.info("Put: {}", result);
         } catch (Exception e) {
             LOG.warn(e.getMessage());
             throw new RuntimeException("Database update failed!");

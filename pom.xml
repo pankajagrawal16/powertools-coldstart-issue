@@ -60,6 +60,7 @@
             <groupId>io.symphonia</groupId>
             <artifactId>lambda-logging</artifactId>
             <version>${symphonia.logging.version}</version>
+            <classifier>no-config</classifier>
         </dependency>
         <!--
         <dependency>
@@ -68,6 +69,13 @@
             <version>0.4.0-beta</version>
         </dependency>
         -->
+
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-xray-recorder-sdk-aws-sdk-v2</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+
 
         <!-- JSON -->
         <dependency>

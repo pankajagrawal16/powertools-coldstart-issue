@@ -1,14 +1,11 @@
-package com.drissamri.client.config.http;
+package com.drissamri.client.core.http;
 
 public enum HttpStatusCode {
     OK_200(200),
     ACCEPTED_202(202),
-    NO_CONTENT_204(204),
     FORBIDDEN_403(403),
     NOT_FOUND_404(404),
-    METHOD_NOT_ALLOWED_405(405),
     BAD_REQUEST_400(400),
-    CONFLICT_409(409),
     UNPROCESSABLE_ENTITY_422(422),
     INTERNAL_SERVER_ERROR_500(500),
     SERVICE_UNAVAILABLE_503(503);
