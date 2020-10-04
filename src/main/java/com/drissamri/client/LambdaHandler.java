@@ -6,6 +6,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.drissamri.client.http.HttpResponses;
 import com.drissamri.client.model.Client;
+import com.drissamri.client.service.ClientService;
 import com.fasterxml.jackson.jr.ob.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,14 @@ import java.io.IOException;
 
 public class LambdaHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
     private static final Logger LOG = LoggerFactory.getLogger(LambdaHandler.class);
+    private final ClientService clientService;
 
     public LambdaHandler() {
+        this(AppConfig.clientService());
+    }
 
+    public LambdaHandler(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @Override
@@ -26,6 +32,7 @@ public class LambdaHandler implements RequestHandler<APIGatewayProxyRequestEvent
         try {
             Client client = JSON.std.beanFrom(Client.class, event.getBody());
             LOG.info("Client: {}", client);
+            clientService.create(client);
             return HttpResponses.ok();
         } catch (IOException e) {
             return HttpResponses.unprocessableEntity("Invalid input");

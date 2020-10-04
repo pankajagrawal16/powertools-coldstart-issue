@@ -54,86 +54,114 @@
         </dependency>
 
         <dependency>
-            <groupId>io.symphonia</groupId>
-            <artifactId>lambda-logging</artifactId>
-            <version>${symphonia.logging.version}</version>
-        </dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>dynamodb</artifactId>
+            <version>${aws.sdk.version}</version>
+        <exclusions>
+            <exclusion>
+                <artifactId>apache-client</artifactId>
+                <groupId>software.amazon.awssdk</groupId>
+            </exclusion>
+            <exclusion>
+                <artifactId>netty-nio-client</artifactId>
+                <groupId>software.amazon.awssdk</groupId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>aws-crt-client</artifactId>
+        <version>2.15.2-PREVIEW</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.jr</groupId>
-            <artifactId>jackson-jr-objects</artifactId>
-            <version>2.11.3</version>
-        </dependency>
+    <dependency>
+        <groupId>io.symphonia</groupId>
+        <artifactId>lambda-logging</artifactId>
+        <version>${symphonia.logging.version}</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.6.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.16.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>com.fasterxml.jackson.jr</groupId>
+        <artifactId>jackson-jr-objects</artifactId>
+        <version>2.11.3</version>
+    </dependency>
 
-    <build>
-        <plugins>
-            <!-- ZIP Packaging -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>io.symphonia</groupId>
-                        <artifactId>lambda-packaging</artifactId>
-                        <version>1.0.0</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <descriptorRefs>
-                        <descriptorRef>lambda-zip</descriptorRef>
-                    </descriptorRefs>
-                    <finalName>${project.artifactId}</finalName>
-                </configuration>
-            </plugin>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.6.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>3.16.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.5.13</version>
+        <scope>test</scope>
+    </dependency>
 
-            <plugin>
-                <groupId>io.github.zlika</groupId>
-                <artifactId>reproducible-build-maven-plugin</artifactId>
-                <version>0.12</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>strip-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+</dependencies>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<build>
+<plugins>
+    <!-- ZIP Packaging -->
+    <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.1.1</version>
+        <dependencies>
+            <dependency>
+                <groupId>io.symphonia</groupId>
+                <artifactId>lambda-packaging</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+        <executions>
+            <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                    <goal>single</goal>
+                </goals>
+            </execution>
+        </executions>
+        <configuration>
+            <appendAssemblyId>false</appendAssemblyId>
+            <descriptorRefs>
+                <descriptorRef>lambda-zip</descriptorRef>
+            </descriptorRefs>
+            <finalName>${project.artifactId}</finalName>
+        </configuration>
+    </plugin>
 
-</project>
+    <plugin>
+        <groupId>io.github.zlika</groupId>
+        <artifactId>reproducible-build-maven-plugin</artifactId>
+        <version>0.12</version>
+        <executions>
+            <execution>
+                <phase>package</phase>
+                <goals>
+                    <goal>strip-jar</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <encoding>UTF-8</encoding>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+        </configuration>
+    </plugin>
+</plugins>
+</build>
+
+        </project>

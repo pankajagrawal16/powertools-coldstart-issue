@@ -49,7 +49,7 @@ functions:
 
     environment:
       REGION: ${self:provider.region}
-      TABLE_NAME: !Ref ClientTable
+      CLIENT_TABLE: !Ref ClientTable
 plugins:
   - serverless-domain-manager
 

@@ -10,5 +10,7 @@
     "serverless": "2.4.0",
     "serverless-domain-manager": "5.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lumigo-cli": "^0.47.0"
+  }
 }
